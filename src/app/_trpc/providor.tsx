@@ -4,11 +4,9 @@ import { httpBatchLink } from "@trpc/client";
 import React, { useState } from "react";
 
 import { trpc } from "./client";
+import { URL } from "./settings";
 
-enum URL {
-    DEV = "http://localhost:3000",
-    PROD = ""
-}
+
 
 export default function TRPCProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({}));

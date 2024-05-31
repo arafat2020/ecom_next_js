@@ -1,9 +1,10 @@
-"use client"
 import React from 'react'
+import { serverClient } from './_trpc/serverClient'
 
-function Home() {
+async function Home() {
+  const data = await serverClient.getCategories()
   return (
-    <div>Home</div>
+    <div>{JSON.stringify(data)}</div>
   )
 }
 
