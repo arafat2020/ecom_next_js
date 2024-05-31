@@ -1,3 +1,4 @@
+import  Nav  from '@/components/admin/nav/Nav';
 import React from 'react'
 
 function AdminLayout({
@@ -6,7 +7,8 @@ function AdminLayout({
     children: React.ReactNode;
   }>) {
   return (
-    <div>
+    <div className='w-screen h-screen flex'>
+      <Nav />
         {children}
     </div>
   )
