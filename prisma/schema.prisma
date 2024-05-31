@@ -20,13 +20,13 @@ enum UserType {
 }
 
 model User {
-  id       String    @id @default(uuid())
+  id       String    @id
   userType UserType
   sessions Session[]
 }
 
 model Session {
-  id        String   @id @default(uuid())
+  id        String   @id
   userId    String
   expiresAt DateTime
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
@@ -35,22 +35,32 @@ model Session {
 }
 
 model Category {
-  id      String    @id @default(uuid())
-  name    String
-  img     String
-  product Product[]
+  id          String        @id @default(uuid())
+  name        String
+  img         String
+  subCategory SubCategory[]
+}
+
+model SubCategory {
+  id         String    @id @default(uuid())
+  name       String
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+  Product    Product[]
+  @@index([categoryId])
 }
 
 model Product {
-  id          String    @id @default(uuid())
-  Catagory    Category? @relation(fields: [catagoryId], references: [id])
-  name        String
-  description String
-  price       Int
-  discount    Int?
-  catagoryId  String?
-  primaryImg  String
-  showcaseImg String[]
+  id            String       @id @default(uuid())
+  name          String
+  description   String
+  price         Int
+  discount      Int?
+  catagoryId    String?
+  primaryImg    String
+  showcaseImg   String[]
+  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+  subCategoryId String?
 
-  @@index([catagoryId])
+  @@index([subCategoryId])
 }
