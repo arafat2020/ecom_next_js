@@ -8,7 +8,7 @@ function Card() {
         <p className="text-2xl font-bold">76%</p>
         <p className="text-sm">Income</p>
       </div>
-      <div className='bg-gradient-to-tr from-slate-950 via-slate-800 to-slate-700 p-2 rounded-lg'>
+      <div className='bg-gradient-to-tr from-slate-700 via-slate-800 to-slate-700 p-2 rounded-lg'>
         <p className="text-2xl font-bold">44%</p>
         <p className="text-sm">Speedings</p>
       </div>
@@ -33,7 +33,7 @@ function Card() {
 
 function Admin() {
   return (
-    <div className="flex-grow flex flex-col h-full p-4 space-y-2">
+    <div className="flex-grow flex flex-col h-full p-5 space-y-2 bg-amber-50 rounded-3xl">
       <div className='grid grid-cols-3 gap-3'>
         <Card/>
         <Card/>

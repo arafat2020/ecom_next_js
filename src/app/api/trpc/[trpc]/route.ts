@@ -6,7 +6,11 @@ function handler(req: Request) {
     endpoint: '/api/trpc',
     req,
     router: appRouter,
-    createContext: () => ({ })
+    createContext: ({info}) => {
+      console.log(info,'info');
+      
+      return info
+    }
   });
 }
 
