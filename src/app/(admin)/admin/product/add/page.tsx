@@ -4,9 +4,7 @@ import prisma from "@/lib/db";
 
 
 async function ProductAdd() {
-  const category = await serverClient.getCategories()
-  console.log(category);
-  
+  const category = await serverClient.getCategories()  
   return (
     <AddProduct category={category} />
   )

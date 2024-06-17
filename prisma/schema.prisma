@@ -44,7 +44,7 @@ model Category {
 model SubCategory {
   id         String    @id @default(uuid())
   name       String
-  Category   Category? @relation(fields: [categoryId], references: [id])
+  Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String?
   Product    Product[]
   @@index([categoryId])
@@ -59,7 +59,7 @@ model Product {
   catagoryId    String?
   primaryImg    String
   showcaseImg   String[]
-  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
   subCategoryId String?
 
   @@index([subCategoryId])

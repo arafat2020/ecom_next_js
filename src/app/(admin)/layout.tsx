@@ -7,10 +7,10 @@ function AdminLayout({
     children: React.ReactNode;
   }>) {
   return (
-    <div className='w-screen h-screen flex'>
+    <main className='w-screen h-screen flex'>
       <Nav />
         {children}
-    </div>
+    </main>
   )
 }
 

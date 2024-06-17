@@ -1,9 +1,7 @@
-import React from 'react'
+import { redirect } from 'next/navigation'
 
-async function Home() {
-  return (
-    <div>ullala</div>
-  )
+function Root() {
+  redirect('/home')
 }
 
-export default Home
+export default Root
