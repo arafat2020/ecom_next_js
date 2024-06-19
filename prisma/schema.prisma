@@ -47,6 +47,7 @@ model SubCategory {
   Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String?
   Product    Product[]
+
   @@index([categoryId])
 }
 
@@ -61,6 +62,16 @@ model Product {
   showcaseImg   String[]
   SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
   subCategoryId String?
+  Banner        Banner[]
 
   @@index([subCategoryId])
+}
+
+model Banner {
+  id        String  @id @default(uuid())
+  title     String
+  discount  Int
+  suntitle  String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
 }

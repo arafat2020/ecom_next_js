@@ -75,3 +75,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+.glass-bg-1 {
+  /* From https://css.glass */
+background: rgba(45, 194, 241, 0.06);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(3.1px);
+-webkit-backdrop-filter: blur(3.1px);
+}

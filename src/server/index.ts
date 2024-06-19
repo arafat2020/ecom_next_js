@@ -109,9 +109,24 @@ export const appRouter = route({
                 SubCategory:true
             }
         })
-    })
+    }),
     // ===========================================================
     // -_-Product route end-_-
+    // ===========================================================
+      // ===========================================================
+    // -_-Banner route start-_-
+    // ===========================================================
+    getBannerData: procedure.query(async()=>{
+        const data = await prisma.banner.findMany({
+            include:{
+                product:true
+            }
+        })
+        return data
+    }
+    )
+    // ===========================================================
+    // -_-Banner route end-_-
     // ===========================================================
 });
 export const createCaller = createCallerFactory(appRouter)
