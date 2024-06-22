@@ -1,4 +1,5 @@
 import { serverClient } from '@/app/_trpc/serverClient'
+import Button from '@/components/Product/Button';
 import { notFound } from 'next/navigation';
 import React from 'react'
 
@@ -12,7 +13,7 @@ async function Product({ params }: { params: { id: string } }) {
         notFound()
     }
     return (
-        <div className="max-w-6xl mx-auto p-4 bg-gradient-to-b from-rose-900 via-slate-700 to-black">
+        <div className="w-full mx-auto p-4 bg-gradient-to-b from-rose-500 via-slate-600 to-slate-800">
             <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2">
                     <img src={product?.primaryImg} alt={product?.name} className="w-full h-auto glass-bg-1" />
@@ -31,7 +32,7 @@ async function Product({ params }: { params: { id: string } }) {
                             <span className="text-slate-50 ml-2">{calculateDiscountedPrice(product.price, product.discount)}$</span>
                         </div> : <span className="text-slate-50  ml-2">{product?.price}$</span>}
                     </div>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+                    <Button obj={product}/>
                 </div>
             </div>
         </div>
