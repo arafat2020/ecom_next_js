@@ -9,9 +9,9 @@ type ProductListType = Awaited<ReturnType<typeof serverClient.getProducts>>;
 
 function HomePage({productList,children}:{productList:ProductListType, children:React.ReactNode}) {
   return (
-    <div className="w-full ">  
+    <div className="max-w-full ">  
           {children}
-    <div className='w-full grid grid-cols-4 gap-3 p-3'>
+    <div className='max-w-full grid grid-cols-4 gap-3 mt-3 px-3'>
     {
       productList.map(e=>{
         return <CardOne key={e.id} {...e}/>

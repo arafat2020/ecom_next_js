@@ -22,23 +22,22 @@ function SliderClient({ bannerData }: { bannerData: ProductListType }) {
             Autoplay({
               delay: 3000,
             }),
-          ]} className='w-full h-full p-3'>
+          ]} className='w-full h-full bg-gradient-to-b from-rose-900 via-slate-800 to-black shadow-xl p-3'>
             <CarouselContent>
                 {bannerData.map(e => {
                     return <CarouselItem
-                    style={{
-                        backgroundImage:'url(/bg.jpg)'
-                    }}
                      key={e.id} className=' w-full h-[370px] mb-3'>
-                        <div className='w-full h-full p-3 bg-gradient-to-tr from-sky-900 via-slate-900 to-sky-900 flex shadow-xl rounded-md '>
+                        <div className='w-full h-full flex'>
                             <div className='w-1/2 h-full'>
-                                <h2 className='text-[4.2rem] font-sans font-bold bg-gradient-to-r from-rose-600 via-cyan-300 to-red-600 inline-block text-transparent bg-clip-text leading-[60px]'>{e.title}</h2>
+                               <div>
+                                 <h2 className='text-[4.2rem] font-sans font-bold bg-gradient-to-r from-rose-600 via-cyan-300 to-red-600 inline-block text-transparent bg-clip-text leading-[60px]'>{e.title}</h2>
                                 <h3 className='text-xl font-sans text-amber-100'>{e.suntitle}</h3>
                                 <div className='my-5 bg-rose-600 w-fit p-2 rounded-3xl'>
                                     <p className='font-sans font-bold text-xl text-cyan-100'>Get {e.discount}% of</p>
                                 </div>
+                               </div>
                             </div>
-                            <div className='w-1/2 h-full overflow-hidden'>
+                            <div className='w-1/2 h-full overflow-hidden z-40'>
                                 <div className='w-full h-2/3 flex justify-between items-center'>
                                     <img src={e.product.primaryImg} alt="img" className='w-full' />
                                 </div>

@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <TRPCProvider>
-        <body className="w-full h-screen">
+        <body className="w-screen h-screen">
           {children}
           <Toaster />
         </body>
