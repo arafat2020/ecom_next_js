@@ -14,7 +14,7 @@ function MainLayout({
             <Nav />
             <div className="flex-grow flex overflow-y-scroll scrollbar-hide">
                 <Sidebar />
-                <div className="w-5/6  bg-black">
+                <div className="w-full md:w-5/6  bg-black">
                    <ScrollArea className='w-full h-full'>
                    {children}
                    </ScrollArea>

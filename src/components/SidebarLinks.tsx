@@ -14,7 +14,7 @@ function SidebarLinks({ category }: { category: Category }) {
         <div className='w-full'>
             {
                 category.map(e => {
-                    return <Collapsible key={e.id}>
+                    return <Collapsible defaultOpen key={e.id}>
                         <CollapsibleTrigger className='flex space-x-2 my-2 ml-2 p-1 items-center'>
                             <img className='w-[25px] h-[25px] bg-amber-200 p-1 rounded-lg' alt='img' src={e.img} /> <span className='text-white text-sm font-sans font-medium'>{e.name}</span>
                         </CollapsibleTrigger>

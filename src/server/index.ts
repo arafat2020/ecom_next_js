@@ -12,7 +12,7 @@ export const appRouter = route({
             select: {
                 id: true,
                 name: true,
-                img:true,
+                img: true,
                 subCategory: {
                     select: {
                         id: true,
@@ -22,7 +22,7 @@ export const appRouter = route({
             }
         })
         // console.log(data,'arr');
-       
+
         return data
     }),
     postCategory: procedure.input(z.object({
@@ -94,40 +94,86 @@ export const appRouter = route({
 
 
     getProducts: procedure.query(async () => {
-     return prisma.product.findMany({
-        include:{
-            SubCategory:true,
-        }
-     })
+        return prisma.product.findMany({
+            include: {
+                SubCategory: true,
+            }
+        })
     }),
 
 
-    getProduct: procedure.input(z.object({id:z.string().min(1)})).query(async({input})=>{
+    getProduct: procedure.input(z.object({ id: z.string().min(1) })).query(async ({ input }) => {
         return prisma.product.findUnique({
-            where:input,
-            include:{
-                SubCategory:true
+            where: input,
+            include: {
+                SubCategory: true
             }
         })
     }),
     // ===========================================================
     // -_-Product route end-_-
     // ===========================================================
-      // ===========================================================
+    // ===========================================================
     // -_-Banner route start-_-
     // ===========================================================
-    getBannerData: procedure.query(async()=>{
+    getBannerData: procedure.query(async () => {
         const data = await prisma.banner.findMany({
-            include:{
-                product:true
+            include: {
+                product: true
             }
         })
         return data
     }
-    )
+    ),
     // ===========================================================
     // -_-Banner route end-_-
     // ===========================================================
+    // ===========================================================
+    // -_-payment route start-_-
+    // ===========================================================
+    createPayment: procedure.input(z.object({
+        products: z.array(z.object({
+            productId: z.string().min(1),
+            finalPrice: z.number().min(1),
+            quantity: z.number().min(1)
+        }))
+    })).mutation(async ({ input }) => {
+        return prisma.createPayment.create({
+            data: {
+                PrductPayment: {
+                    createMany: {
+                        data: input.products
+                    }
+                }
+            },
+            include: {
+                _count: true,
+                PrductPayment: true
+            }
+        })
+    }),
+
+    getCreatedPayment: procedure.input(z.object({
+        id: z.string().min(1)
+    })).query(async ({ input }) => {
+        return prisma.createPayment.findUnique({
+            where: {
+                id: input.id
+            },
+            include: {
+                _count: true,
+                PrductPayment: {
+                    include: {
+                        product: true
+                    }
+                }
+            }
+        })
+    })
+    // ===========================================================
+    // -_-payment route end-_-
+    // ===========================================================
+
 });
 export const createCaller = createCallerFactory(appRouter)
 export type AppRouter = typeof appRouter;

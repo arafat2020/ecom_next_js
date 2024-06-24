@@ -34,7 +34,7 @@ function Nav() {
             </div>
             <div className='p-3 flex space-x-3'>
 
-                <div onClick={()=>disPatch(sideBarOpen())} className='relative'>
+                <div onClick={()=>disPatch(sideBarOpen())} className='relative cur'>
                     <ShoppingBag className='h-[30px] w-[30px] text-amber-600' />
                     <div className='bg-rose-600 w-[23px] h-[23px] absolute top-[-6px] right-[-9px] flex border-[3px] border-slate-800 justify-around text-amber-200 font-sans items-center rounded-full m-1'>{chertData.length}</div>
                 </div>

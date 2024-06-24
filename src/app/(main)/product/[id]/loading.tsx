@@ -2,7 +2,7 @@
 import React from 'react';
 
 const LoadingSpinner = () => (
-    <div className="w-full mx-auto p-4 animate-pulse bg-gradient-to-b from-red-500 via-slate-500 to-black">
+    <div className="w-full h-full mx-auto p-4 animate-pulse bg-gradient-to-b from-red-500 via-slate-500 to-black">
     <div className="flex flex-col md:flex-row items-center">
       <div className="md:w-2/3">
         <div className="w-full h-64 bg-gradient-to-b from-rose-300 via-cyan-500 to-black"></div>

@@ -52,17 +52,18 @@ model SubCategory {
 }
 
 model Product {
-  id            String       @id @default(uuid())
-  name          String
-  description   String
-  price         Int
-  discount      Int?
-  catagoryId    String?
-  primaryImg    String
-  showcaseImg   String[]
-  SubCategory   SubCategory? @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
-  subCategoryId String?
-  Banner        Banner[]
+  id             String           @id @default(uuid())
+  name           String
+  description    String
+  price          Int
+  discount       Int?
+  catagoryId     String?
+  primaryImg     String
+  showcaseImg    String[]
+  SubCategory    SubCategory?     @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
+  subCategoryId  String?
+  Banner         Banner[]
+  ProductPayment ProductPayment[]
 
   @@index([subCategoryId])
 }
@@ -74,4 +75,19 @@ model Banner {
   suntitle  String
   product   Product @relation(fields: [productId], references: [id])
   productId String
+}
+
+model ProductPayment {
+  id              String         @id @default(uuid())
+  product         Product        @relation(fields: [productId], references: [id])
+  productId       String
+  finalPrice      Int
+  quantity        Int
+  CreatePayment   CreatePayment? @relation(fields: [createPaymentId], references: [id])
+  createPaymentId String?
+}
+
+model CreatePayment {
+  id            String           @id @default(uuid())
+  PrductPayment ProductPayment[]
 }

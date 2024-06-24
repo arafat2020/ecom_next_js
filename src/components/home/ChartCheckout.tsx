@@ -1,4 +1,7 @@
-import { addToChart, getChert, removeFromChert } from '@/lib/app/features/chert/chert'
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react/no-unescaped-entities */
+"use client"
+import { addToChart, clearChert, getChert, removeFromChert } from '@/lib/app/features/chert/chert'
 import { SidebarClose, isSidebarOpen } from '@/lib/app/features/fn/fn'
 import { MinusCircle, PlusCircle } from 'lucide-react'
 import React from 'react'
@@ -6,16 +9,46 @@ import Drawer from 'react-modern-drawer'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollArea } from '../ui/scroll-area'
 import { Button } from '../ui/button'
+import { trpc } from '@/app/_trpc/client'
+import { serverClient } from '@/app/_trpc/serverClient'
+import { useRouter } from 'next/navigation'
 
 
 function ChartCheckout() {
     const open = useSelector(isSidebarOpen)
+    const { push } = useRouter()
     const product = useSelector(getChert)
     const dispatch = useDispatch()
     const calculateDiscountedPrice = (price: number, discount: number) => {
         if (!discount) return price;
         return price - (price * discount / 100);
     };
+    const { mutate, status, data, error } = trpc.createPayment.useMutation({
+        onSuccess: () => {
+            dispatch(SidebarClose())
+        }
+    })
+    async function submit() {
+        const arr: {
+            productId: string,
+            finalPrice: number,
+            quantity: number
+        }[] = []
+        await product.map(e => {
+            arr.push({
+                productId: e.obj.id,
+                finalPrice: calculateDiscountedPrice(e.obj.price, e.obj.discount as number) * e.quantity,
+                quantity: e.quantity
+            })
+        })
+        await mutate({
+            products: arr
+        })
+        await dispatch(clearChert())
+    }
+    if (data) {
+        push(`/payment/${data.id}`)
+    }
     return (
         <>
             <Drawer
@@ -38,7 +71,7 @@ function ChartCheckout() {
                             product.map(e => {
                                 return <div key={e.obj.id} className='w-full p-1 glass-bg-1 mt-3'>
                                     <div className='w-2/3 mx-auto'>
-                                        <img src={e.obj.primaryImg} alt="img" srcset="" className=' w-full' />
+                                        <img src={e.obj.primaryImg} alt="img" srcSet="" className=' w-full' />
                                         <p className='font-sans font-semibold text-amber-100'>{e.obj.name}</p>
                                     </div>
                                     <div className='w-full flex justify-around items-center my-3'>
@@ -59,7 +92,11 @@ function ChartCheckout() {
                     </ScrollArea>
                     <div className='flex-grow flex justify-around items-center space-x-3'>
                         <Button onClick={() => dispatch(SidebarClose())} variant="outline">Close</Button>
-                        <Button>Proceed To pay</Button>
+                        <Button disabled={status === "pending" || product.length === 0} onClick={() => submit()}>{
+                            status === "pending" && "Processing" ||
+                            status === "success" && "Proceed To Pay" ||
+                            status === "idle" && "Proceed To Pay"
+                        }</Button>
                     </div>
                 </div>
             </Drawer>

@@ -43,13 +43,18 @@ const chertSlice = createSlice({
                     if (state.length > 0) state[index as number].quantity -= 1
                 }
             }
+        },
+
+        clearChert: (state)=>{
+            state.length = 0
         }
     }
 })
 
 export const {
     addToChart,
-    removeFromChert
+    removeFromChert,
+    clearChert
 } = chertSlice.actions
 
 export default chertSlice.reducer
