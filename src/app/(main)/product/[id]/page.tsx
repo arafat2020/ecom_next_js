@@ -13,7 +13,9 @@ async function Product({ params }: { params: { id: string } }) {
         notFound()
     }
     return (
-        <div className="w-full mx-auto p-4 bg-gradient-to-b from-rose-500 via-slate-600 to-slate-800">
+        <div style={{
+            backgroundImage: "url(/bg.jpg)"
+         }} className="w-full mx-auto p-4 bg-gradient-to-b bg-center bg-no-repeat">
             <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2">
                     <img src={product?.primaryImg} alt={product?.name} className="w-full h-auto glass-bg-1" />
